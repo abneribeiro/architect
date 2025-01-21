@@ -1,119 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Arquitetura</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <nav>
-            <h1>AB</h1>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#projetos">Projetos</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
-        </nav>
+      <nav>
+        <h1>AB</h1>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#projetos">Projetos</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropbtn">Sobre</a>
+            <div class="dropdown-content">
+                <a href="#abordagem">Abordagem</a>
+                <a href="#convite">Convite</a>
+                <a href="#Visao">Visão</a>
+                <a href="#equipe">Equipe</a>
+            </div>
+        </li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
     </header>
     <main>
-        <section id="home" class="home">
-            <div class="carousel">
-                <div class="carousel-item active" style="background-image: url('/images/background1.jpg')"></div>
-                <div class="carousel-item" style="background-image: url('/images/background2.jpg')"></div>
-                <div class="carousel-item" style="background-image: url('/images/background3.jpg')"></div>
-            </div>
-            <div class="content-container">
-                <div class="content">
-                    <h2 class="title">
-                        <span class="thin">ART OF MAKING</span>
-                        <span class="bold">HOMES</span>
-                    </h2>
-                </div>
-            </div>
-        </section>
-        <section id="projetos" class="projetos">
-            <h2>Projetos</h2>
-            <div id="projeto-grid" class="projeto-grid">
-                <!-- React code for Projects form -->
-            </div>
-        </section>
-        <section id="sobre" class="sobre">
-            <h2>Sobre Nós</h2>
-            <p>Somos uma empresa de arquitetura dedicada a criar espaços únicos e funcionais. Nossa paixão é transformar
-                ideias em realidade, sempre respeitando as necessidades e desejos de nossos clientes.</p>
-            <p>Com uma equipe de profissionais experientes e criativos, buscamos unir inovação, estética e
-                sustentabilidade em cada projeto. Acreditamos que cada espaço tem o poder de contar uma história e
-                transformar a maneira como as pessoas vivem, trabalham e se conectam com o ambiente ao seu redor.</p>
-            <p>Nossa abordagem é personalizada: escutamos atentamente nossos clientes para entender suas aspirações e
-                traduzimos essas ideias em soluções arquitetônicas excepcionais. Desde a concepção inicial até a
-                conclusão do projeto, priorizamos a excelência em cada etapa.</p>
-            <p>Além disso, valorizamos o impacto positivo que a arquitetura pode ter no mundo. Trabalhamos com materiais
-                e técnicas que respeitam o meio ambiente, criando projetos que são não apenas belos, mas também
-                responsáveis.</p>
-            <p>Nosso portfólio abrange desde residências contemporâneas e edifícios comerciais elegantes até espaços
-                públicos inspiradores. Cada projeto reflete nosso compromisso em superar expectativas e criar algo
-                verdadeiramente especial.</p>
-            <p>Junte-se a nós nesta jornada de transformar sonhos em realidade e descobrir o potencial da arquitetura
-                para elevar vidas.</p>
-        </section>
+      <section id="home" class="home">
+        <div class="carousel">
+          <div
+            class="carousel-item active"
+            style="background-image: url('/images/background1.jpg')"
+          ></div>
+          <div
+            class="carousel-item"
+            style="background-image: url('/images/background2.jpg')"
+          ></div>
+          <div
+            class="carousel-item"
+            style="background-image: url('/images/background3.jpg')"
+          ></div>
+        </div>
+        <div class="content-container">
+          <div class="content">
+            <h2 class="title">
+              <span class="thin">ART OF MAKING</span>
+              <span class="bold">HOMES</span>
+            </h2>
+          </div>
+        </div>
+      </section>
+      <section id="projetos" class="projetos">
+        <h2>Projetos</h2>
+        <div id="projeto-grid" class="projeto-grid">
+          <!-- React code for Projects form -->
+        </div>
+      </section>
+      
 
-        <section id="contato" class="contato">
-            <h2>Contato</h2>
-            <div id="formContainer">
-                <!-- Código React formulario -->
+      <section id="sobre" class="sobre">
+        <div class="container">
+          <h2>Sobre Nós</h2>
+
+          <div class="counters">
+            <div class="counter">
+              <h3 id="projects-completed">0</h3>
+              <p>Projetos Concluídos</p>
             </div>
-        </section>
+            <div class="counter">
+              <h3 id="clients-satisfied">0</h3>
+              <p>Clientes Satisfeitos</p>
+            </div>
+            <div class="counter">
+              <h3 id="years-experience">0</h3>
+              <p>Anos de Experiência</p>
+            </div>
+          </div>
+
+          <div class="tabs">
+            <button class="tab-button active" data-tab="visao">Visão</button>
+            <button class="tab-button" data-tab="abordagem">Abordagem</button>
+            <button class="tab-button" data-tab="equipe">Equipe</button>
+            <button class="tab-button" data-tab="sustentabilidade">
+              Sustentabilidade
+            </button>
+            <button class="tab-button" data-tab="portfolio">Portfólio</button>
+            <button class="tab-button" data-tab="convite">
+              Junte-se a Nós
+            </button>
+          </div>
+          <div class="tab-content active" id="visao">
+            <h3>Nossa Visão</h3>
+            <p>
+              Somos uma empresa de arquitetura dedicada a criar espaços únicos e
+              funcionais. Nossa paixão é transformar ideias em realidade, sempre
+              respeitando as necessidades e desejos de nossos clientes.
+            </p>
+          </div>
+          <div class="tab-content" id="abordagem">
+            <h3>Nossa Abordagem</h3>
+            <p>
+              Nossa abordagem é personalizada: escutamos atentamente nossos
+              clientes para entender suas aspirações e traduzimos essas ideias
+              em soluções arquitetônicas excepcionais. Desde a concepção inicial
+              até a conclusão do projeto, priorizamos a excelência em cada
+              etapa.
+            </p>
+          </div>
+          <div class="tab-content" id="equipe">
+            <h3>Nossa Equipe</h3>
+            <p>
+              Com uma equipe de profissionais experientes e criativos, buscamos
+              unir inovação, estética e sustentabilidade em cada projeto.
+              Acreditamos que cada espaço tem o poder de contar uma história e
+              transformar a maneira como as pessoas vivem, trabalham e se
+              conectam com o ambiente ao seu redor.
+            </p>
+          </div>
+          <div class="tab-content" id="sustentabilidade">
+            <h3>Sustentabilidade</h3>
+            <p>
+              Valorizamos o impacto positivo que a arquitetura pode ter no
+              mundo. Trabalhamos com materiais e técnicas que respeitam o meio
+              ambiente, criando projetos que são não apenas belos, mas também
+              responsáveis.
+            </p>
+          </div>
+          <div class="tab-content" id="portfolio">
+            <h3>Nosso Portfólio</h3>
+            <p>
+              Nosso portfólio abrange desde residências contemporâneas e
+              edifícios comerciais elegantes até espaços públicos inspiradores.
+              Cada projeto reflete nosso compromisso em superar expectativas e
+              criar algo verdadeiramente especial.
+            </p>
+          </div>
+          <div class="tab-content" id="convite">
+            <h3>Junte-se a Nós</h3>
+            <p>
+              Junte-se a nós nesta jornada de transformar sonhos em realidade e
+              descobrir o potencial da arquitetura para elevar vidas.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contato" class="contato">
+        <h2>Contato</h2>
+        <div id="formContainer">
+          <!-- Código React formulario -->
+        </div>
+      </section>
     </main>
 
     <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-column">
-                <h3>Sobre</h3>
-                <p>Somos uma empresa de arquitetura dedicada a transformar ideias em realidade, criando espaços únicos.
-                </p>
-            </div>
-            <div class="footer-column">
-                <h3>Links Rápidos</h3>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#projetos">Projetos</a></li>
-                    <li><a href="#sobre">Sobre</a></li>
-                    <li><a href="#contato">Contato</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Conecte-se</h3>
-                <ul class="social-links">
-                    <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
-                    <li><a href="https://twitter.com" target="_blank">Twitter</a></li>
-                    <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
-                    <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
-                </ul>
-            </div>
+      <div class="footer-container">
+        <div class="footer-column">
+          <h3>Sobre</h3>
+          <p>
+            Somos uma empresa de arquitetura dedicada a transformar ideias em
+            realidade, criando espaços únicos.
+          </p>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 AB Arquitetura. Todos os direitos reservados.</p>
+        <div class="footer-column">
+          <h3>Links Rápidos</h3>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#projetos">Projetos</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
         </div>
+        <div class="footer-column">
+          <h3>Conecte-se</h3>
+          <ul class="social-links">
+            <li><a href="#" target="_blank">Facebook</a></li>
+            <li><a href="#" target="_blank">Twitter</a></li>
+            <li><a href="#" target="_blank">Instagram</a></li>
+            <li><a href="#" target="_blank">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 202 AB Arquitetura. Todos os direitos reservados.</p>
+      </div>
     </footer>
 
+    <div id="datetime" class="datetime"></div>
     <!-- Modal para o pop-up do projeto -->
     <div id="projeto-modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <img id="modal-image" src="" alt="Projeto">
-            <h3 id="modal-title"></h3>
-            <p id="modal-description"></p>
-        </div>
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <img id="modal-image" src="" alt="Projeto" />
+        <h3 id="modal-title"></h3>
+        <p id="modal-description"></p>
+      </div>
     </div>
 
-    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script
+      src="https://unpkg.com/react@16/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+      crossorigin
+    ></script>
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>
