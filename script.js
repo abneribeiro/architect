@@ -1,9 +1,53 @@
 let currentTabIndex = 0;
-const tabIds = ['visao', 'abordagem', 'equipe', 'sustentabilidade', 'portfolio', 'convite'];
+const tabIds = [
+  "visao",
+  "abordagem",
+  "equipe",
+  "sustentabilidade",
+  "portfolio",
+  "convite",
+];
 let intervalId;
 
-
 document.addEventListener("DOMContentLoaded", () => {
+  const hamburgerMenu = document.getElementById("hamburger-menu");
+  const navLinks = document.querySelector(".nav-links");
+  const dropdowns = document.querySelectorAll(".dropdown");
+  const navLinkItems = document.querySelectorAll(".nav-links a");
+
+  hamburgerMenu.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+  });
+
+  dropdowns.forEach((dropdown) => {
+    dropdown.addEventListener("click", (e) => {
+      if (window.innerWidth <= 768) {
+        e.preventDefault();
+        dropdown.classList.toggle("active");
+      }
+    });
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) {
+      navLinks.classList.remove("active");
+      dropdowns.forEach((dropdown) => dropdown.classList.remove("active"));
+    }
+  });
+
+  navLinkItems.forEach((link) => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("active");
+    });
+  });
+  
+  // Fecha o menu ao clicar fora dele
+  document.addEventListener("click", (e) => {
+    if (!navLinks.contains(e.target) && !hamburgerMenu.contains(e.target)) {
+      navLinks.classList.remove("active");
+    }
+  });
+
   const carouselItems = document.querySelectorAll(".carousel-item");
   let currentIndex = 0;
 
@@ -57,27 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", checkFade);
   checkFade();
 
-  const form = document.getElementById("formContainer");
-
-
-
-  
-
-  //TODO Modal logic
-  const modal = document.getElementById("projeto-modal");
-  const modalImage = document.getElementById("modal-image");
-  const modalTitle = document.getElementById("modal-title");
-  const modalDescription = document.getElementById("modal-description");
-  const closeBtn = document.getElementsByClassName("close")[0];
-
-  function openModal(url, title, description) {
-    modalImage.src = url;
-    modalTitle.textContent = title;
-    modalDescription.textContent = description;
-    modal.style.display = "block";
-   
-  }
-
   const projetoItems = document.querySelectorAll(".projeto-item");
   projetoItems.forEach((item, index) => {
     item.addEventListener("click", () => {
@@ -87,6 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   function closeModal() {
     modal.style.display = "none";
+    document.body.style.overflow = 'auto';
   }
 
   closeBtn.onclick = closeModal;
@@ -103,53 +127,67 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  const tabButtons = document.querySelectorAll(".tab-button");
+  const tabContents = document.querySelectorAll(".tab-content");
 
-  const tabButtons = document.querySelectorAll('.tab-button');
-    const tabContents = document.querySelectorAll('.tab-content');
-
-    function showTab(index) {
-        const tabId = tabIds[index];
-        tabContents.forEach(content => {
-            content.classList.remove('active');
-        });
-        tabButtons.forEach(button => {
-            button.classList.remove('active');
-        });
-
-        const selectedTab = document.getElementById(tabId);
-        const selectedButton = document.querySelector(`[data-tab="${tabId}"]`);
-
-        if (selectedTab && selectedButton) {
-            selectedTab.classList.add('active');
-            selectedButton.classList.add('active');
-        }
-        currentTabIndex = index;
-    }
-
-    function rotateTab() {
-        currentTabIndex = (currentTabIndex + 1) % tabIds.length;
-        showTab(currentTabIndex);
-    }
-
-    tabButtons.forEach((button, index) => {
-        button.addEventListener('click', function() {
-            showTab(index);
-            clearInterval(intervalId);
-            startRotation();
-        });
+  function showTab(index) {
+    const tabId = tabIds[index];
+    tabContents.forEach((content) => {
+      content.classList.remove("active");
+    });
+    tabButtons.forEach((button) => {
+      button.classList.remove("active");
     });
 
-    function startRotation() {
-        clearInterval(intervalId);
-        intervalId = setInterval(rotateTab, 5000); // Muda a cada 5 segundos
+    const selectedTab = document.getElementById(tabId);
+    const selectedButton = document.querySelector(`[data-tab="${tabId}"]`);
+
+    if (selectedTab && selectedButton) {
+      selectedTab.classList.add("active");
+      selectedButton.classList.add("active");
     }
+    currentTabIndex = index;
+  }
 
-    startRotation();
+  function rotateTab() {
+    currentTabIndex = (currentTabIndex + 1) % tabIds.length;
+    showTab(currentTabIndex);
+  }
 
-    showTab(0);
+  tabButtons.forEach((button, index) => {
+    button.addEventListener("click", function () {
+      showTab(index);
+      clearInterval(intervalId);
+      startRotation();
+    });
+  });
 
+  function startRotation() {
+    clearInterval(intervalId);
+    intervalId = setInterval(rotateTab, 5000); // Muda a cada 5 segundos
+  }
+
+  startRotation();
+
+  showTab(0);
+
+  const dropdownLinks = document.querySelectorAll(".dropdown-content a");
+
+  // Adiciona evento de clique aos links do dropdown
+  dropdownLinks.forEach((link) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault(); // Evita o comportamento padrão do link
+      const targetId = this.getAttribute("href").substring(1); // Obtém o ID da tab
+      const tabIndex = tabIds.indexOf(targetId); // Localiza o índice do ID na lista tabIds
+
+      if (tabIndex !== -1) {
+        showTab(tabIndex); // Exibe a tab correspondente
+        clearInterval(intervalId); // Para a rotação automática
+        startRotation(); // Reinicia a rotação automática
+      }
+    });
+  });
 });
-
 
 function animateValue(obj, start, end, duration) {
   let startTimestamp = null;
@@ -182,7 +220,6 @@ function checkCounters() {
 
 window.addEventListener("scroll", checkCounters);
 
-
 const revealImages = () => {
   const images = document.querySelectorAll(".projeto-item img");
   images.forEach((img) => {
@@ -197,24 +234,34 @@ const revealImages = () => {
 window.addEventListener("scroll", revealImages);
 revealImages();
 
-
 function updateDateTime() {
   const now = new Date();
-  const datetimeElement = document.getElementById('datetime');
+  const datetimeElement = document.getElementById("datetime");
   datetimeElement.textContent = now.toLocaleString();
 }
 
 setInterval(updateDateTime, 1000);
 updateDateTime();
 
+const modal = document.getElementById("projeto-modal");
+const modalImage = document.getElementById("modal-image");
+const modalTitle = document.getElementById("modal-title");
+const modalDescription = document.getElementById("modal-description");
+const closeBtn = document.getElementsByClassName("close")[0];
 
-
+function openModal(url, title, description) {
+  modalImage.src = url;
+  modalTitle.textContent = title;
+  modalDescription.textContent = description;
+  modal.style.display = "block";
+  document.body.style.overflow = 'hidden';
+}
 
 ("use strict");
 
 const projetos = [
   [
-    "https://images.unsplash.com/photo-1707840718162-134194b2b352?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "/images/photo1.jpg",
     "Casa Vista Serena",
     "Uma residência moderna com amplas janelas que destacam a integração com a natureza ao redor, proporcionando uma vista relaxante e sofisticada.",
   ],
@@ -248,14 +295,25 @@ const projetos = [
 function ProjetoItem(props) {
   return React.createElement(
     "div",
-    { className: "projeto-item", onClick: () => openModal(props.url, props.lead, props.descricao) },
+    {
+      className: "projeto-item",
+      onClick: () => openModal(props.url, props.lead, props.descricao),
+    },
     [
-      React.createElement("img", { src: props.url, alt: props.lead, key: `img-${props.lead}` }, null),
+      React.createElement(
+        "img",
+        { src: props.url, alt: props.lead, key: `img-${props.lead}` },
+        null
+      ),
       React.createElement(
         "div",
         { key: `div-${props.lead}` },
-        React.createElement("h2", { className: "projeto-item-title" }, props.lead) // Não usa mais props.key
-      )
+        React.createElement(
+          "h2",
+          { className: "projeto-item-title" },
+          props.lead
+        ) // Não usa mais props.key
+      ),
     ]
   );
 }
@@ -282,12 +340,12 @@ class Forms extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      reason: '', 
-      email: '',
-      phone: '',
-      message: '',
-      errors: {}
+      name: "",
+      reason: "",
+      email: "",
+      phone: "",
+      message: "",
+      errors: {},
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -302,19 +360,20 @@ class Forms extends React.Component {
     const { name, reason, email, phone, message } = this.state;
     const errors = {};
 
-    if (!name) errors.name = 'Nome é obrigatório';
-    if (!reason) errors.reason = 'Motivo de Contacto é obrigatório';
+    if (!name) errors.name = "Nome é obrigatório";
+    if (!reason) errors.reason = "Motivo de Contacto é obrigatório";
     if (!email) {
-      errors.email = 'E-mail é obrigatório';
+      errors.email = "E-mail é obrigatório";
     } else if (!/\S+@\S+\.\S+/.test(email)) {
-      errors.email = 'E-mail inválido';
+      errors.email = "E-mail inválido";
     }
     if (!phone) {
-      errors.phone = 'Telefone é obrigatório';
+      errors.phone = "Telefone é obrigatório";
     } else if (!/^\d{10,15}$/.test(phone)) {
-      errors.phone = 'Telefone inválido (apenas números com 10 a 15 dígitos são aceitos)';
+      errors.phone =
+        "Telefone inválido (apenas números com 10 a 15 dígitos são aceitos)";
     }
-    if (!message) errors.message = 'Mensagem é obrigatória';
+    if (!message) errors.message = "Mensagem é obrigatória";
 
     this.setState({ errors });
     return errors;
@@ -329,8 +388,7 @@ class Forms extends React.Component {
     if (Object.keys(errors).length > 0) {
       // Exibir os erros no alerta
       alert(
-        'Erros encontrados no formulário:\n' +
-        Object.values(errors).join('\n')
+        "Erros encontrados no formulário:\n" + Object.values(errors).join("\n")
       );
     } else {
       submitButton.innerHTML = '<span class="loading"></span> Enviando...';
@@ -339,7 +397,7 @@ class Forms extends React.Component {
       setTimeout(() => {
         const { name, reason, email, phone, message } = this.state;
         const formData = { name, reason, email, phone, message };
-        localStorage.setItem('contactForm', JSON.stringify(formData));
+        localStorage.setItem("contactForm", JSON.stringify(formData));
         submitButton.innerHTML = "Enviado com sucesso!";
         submitButton.style.backgroundColor = "#4CAF50";
 
@@ -348,12 +406,12 @@ class Forms extends React.Component {
           submitButton.disabled = false;
           submitButton.style.backgroundColor = "";
           this.setState({
-            name: '',
-            reason: '',
-            email: '',
-            phone: '',
-            message: '',
-            errors: {}
+            name: "",
+            reason: "",
+            email: "",
+            phone: "",
+            message: "",
+            errors: {},
           });
         }, 3000);
       }, 2000);
@@ -368,26 +426,54 @@ class Forms extends React.Component {
       React.createElement(
         "div",
         null,
-        React.createElement("input", { type: "text", name: "name", placeholder: "Nome", value: this.state.name, onChange: this.handleChange }),
-        errors.name && React.createElement("span", { className: "error" }, errors.name)
+        React.createElement("input", {
+          type: "text",
+          name: "name",
+          placeholder: "Nome",
+          value: this.state.name,
+          onChange: this.handleChange,
+        }),
+        errors.name &&
+          React.createElement("span", { className: "error" }, errors.name)
       ),
       React.createElement(
         "div",
         null,
-        React.createElement("input", { type: "text", name: "reason", placeholder: "Motivo de Contacto", value: this.state.reason, onChange: this.handleChange }),
-        errors.reason && React.createElement("span", { className: "error" }, errors.reason)
+        React.createElement("input", {
+          type: "text",
+          name: "reason",
+          placeholder: "Motivo de Contacto",
+          value: this.state.reason,
+          onChange: this.handleChange,
+        }),
+        errors.reason &&
+          React.createElement("span", { className: "error" }, errors.reason)
       ),
       React.createElement(
         "div",
         null,
-        React.createElement("input", { type: "email", name: "email", placeholder: "Seu e-mail", value: this.state.email, onChange: this.handleChange }),
-        errors.email && React.createElement("span", { className: "error" }, errors.email)
+        React.createElement("input", {
+          type: "email",
+          name: "email",
+          placeholder: "Seu e-mail",
+          value: this.state.email,
+          onChange: this.handleChange,
+        }),
+        errors.email &&
+          React.createElement("span", { className: "error" }, errors.email)
       ),
       React.createElement(
         "div",
         null,
-        React.createElement("input", { type: "tel", name: "phone", placeholder: "Telefone", value: this.state.phone, onChange: this.handleChange }),
-        errors.phone && React.createElement("span", { className: "error" }, errors.phone)
+        React.createElement("input", {
+          type: "tel",
+          name: "phone",
+          placeholder: "Telefone",
+          value: this.state.phone,
+          onChange: this.handleChange,
+        }),
+        errors.phone &&
+          React.createElement("span", { className: "error" }, errors.phone)
       ),
       React.createElement(
         "div",
@@ -400,7 +486,8 @@ class Forms extends React.Component {
           value: this.state.message,
           onChange: this.handleChange,
         }),
-        errors.message && React.createElement("span", { className: "error" }, errors.message)
+        errors.message &&
+          React.createElement("span", { className: "error" }, errors.message)
       ),
       React.createElement("button", { type: "submit" }, "Enviar")
     );
