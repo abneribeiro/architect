@@ -1,3 +1,8 @@
+let currentTabIndex = 0;
+const tabIds = ['visao', 'abordagem', 'equipe', 'sustentabilidade', 'portfolio', 'convite'];
+let intervalId;
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const carouselItems = document.querySelectorAll(".carousel-item");
   let currentIndex = 0;
@@ -33,6 +38,31 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  const fadeInElements = document.querySelectorAll(
+    ".projetos, .sobre, .contato"
+  );
+
+  function checkFade() {
+    fadeInElements.forEach((element) => {
+      const elementTop = element.getBoundingClientRect().top;
+      const elementBottom = element.getBoundingClientRect().bottom;
+
+      if (elementTop < window.innerHeight && elementBottom > 0) {
+        element.style.opacity = "1";
+        element.style.transform = "translateY(0)";
+      }
+    });
+  }
+
+  window.addEventListener("scroll", checkFade);
+  checkFade();
+
+  const form = document.getElementById("formContainer");
+
+
+
+  
+
   //TODO Modal logic
   const modal = document.getElementById("projeto-modal");
   const modalImage = document.getElementById("modal-image");
@@ -45,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
     modalTitle.textContent = title;
     modalDescription.textContent = description;
     modal.style.display = "block";
+   
   }
 
   const projetoItems = document.querySelectorAll(".projeto-item");
@@ -72,18 +103,113 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Form submission logic
-  const form = document.querySelector("form");
-  if (form) {
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      // Add your form submission logic here
-      console.log("Form submitted");
+
+  const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    function showTab(index) {
+        const tabId = tabIds[index];
+        tabContents.forEach(content => {
+            content.classList.remove('active');
+        });
+        tabButtons.forEach(button => {
+            button.classList.remove('active');
+        });
+
+        const selectedTab = document.getElementById(tabId);
+        const selectedButton = document.querySelector(`[data-tab="${tabId}"]`);
+
+        if (selectedTab && selectedButton) {
+            selectedTab.classList.add('active');
+            selectedButton.classList.add('active');
+        }
+        currentTabIndex = index;
+    }
+
+    function rotateTab() {
+        currentTabIndex = (currentTabIndex + 1) % tabIds.length;
+        showTab(currentTabIndex);
+    }
+
+    tabButtons.forEach((button, index) => {
+        button.addEventListener('click', function() {
+            showTab(index);
+            clearInterval(intervalId);
+            startRotation();
+        });
     });
-  }
+
+    function startRotation() {
+        clearInterval(intervalId);
+        intervalId = setInterval(rotateTab, 5000); // Muda a cada 5 segundos
+    }
+
+    startRotation();
+
+    showTab(0);
+
 });
 
-// React Components for Projeto Items
+
+function animateValue(obj, start, end, duration) {
+  let startTimestamp = null;
+  const step = (timestamp) => {
+    if (!startTimestamp) startTimestamp = timestamp;
+    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+    obj.innerHTML = Math.floor(progress * (end - start) + start);
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    }
+  };
+  window.requestAnimationFrame(step);
+}
+
+const projectsCompleted = document.getElementById("projects-completed");
+const clientsSatisfied = document.getElementById("clients-satisfied");
+const yearsExperience = document.getElementById("years-experience");
+
+function checkCounters() {
+  const countersTop = document
+    .querySelector(".counters")
+    .getBoundingClientRect().top;
+  if (countersTop < window.innerHeight) {
+    animateValue(projectsCompleted, 0, 150, 3000);
+    animateValue(clientsSatisfied, 0, 200, 3000);
+    animateValue(yearsExperience, 0, 15, 3000);
+    window.removeEventListener("scroll", checkCounters);
+  }
+}
+
+window.addEventListener("scroll", checkCounters);
+
+
+const revealImages = () => {
+  const images = document.querySelectorAll(".projeto-item img");
+  images.forEach((img) => {
+    const imgTop = img.getBoundingClientRect().top;
+    if (imgTop < window.innerHeight - 100) {
+      img.style.opacity = "1";
+      img.style.transform = "translateY(0)";
+    }
+  });
+};
+
+window.addEventListener("scroll", revealImages);
+revealImages();
+
+
+function updateDateTime() {
+  const now = new Date();
+  const datetimeElement = document.getElementById('datetime');
+  datetimeElement.textContent = now.toLocaleString();
+}
+
+setInterval(updateDateTime, 1000);
+updateDateTime();
+
+
+
+
 ("use strict");
 
 const projetos = [
@@ -122,17 +248,23 @@ const projetos = [
 function ProjetoItem(props) {
   return React.createElement(
     "div",
-    { className: "projeto-item" },
-    React.createElement("img", { src: props.url, alt: props.lead }, null),
-    // React.createElement("h3", null, props.lead || "Lead padrão"),
-    // React.createElement("p", null, props.descricao || "Texto padrão")
+    { className: "projeto-item", onClick: () => openModal(props.url, props.lead, props.descricao) },
+    [
+      React.createElement("img", { src: props.url, alt: props.lead, key: `img-${props.lead}` }, null),
+      React.createElement(
+        "div",
+        { key: `div-${props.lead}` },
+        React.createElement("h2", { className: "projeto-item-title" }, props.lead) // Não usa mais props.key
+      )
+    ]
   );
 }
 
 function App({ projeto }) {
   return projeto.map((proj, index) =>
     React.createElement(ProjetoItem, {
-      key: index,
+      key: `projeto-${index}`, // Key para React
+      id: `projeto-${index}`,
       url: proj[0],
       lead: proj[1],
       descricao: proj[2],
@@ -146,32 +278,133 @@ ReactDOM.render(
 );
 
 // React Component for Form
-function Forms() {
-  return React.createElement(
-    "form",
-    { className: "form" },
-    React.createElement(
-      "input",
-      { type: "text", name: "name", placeholder: "Nome" },
-      null
-    ),
-    React.createElement(
-      "input",
-      { type: "email", name: "email", placeholder: "Seu e-mail" },
-      null
-    ),
-    React.createElement(
-      "textarea",
-      {
-        name: "message",
-        placeholder: "Mensagem",
-        required: true,
-        style: { resize: "none", width: "100%", height: "90px" },
-      },
-      null
-    ),
-    React.createElement("button", { type: "submit" }, "Enviar")
-  );
+class Forms extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      reason: '', 
+      email: '',
+      phone: '',
+      message: '',
+      errors: {}
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  }
+
+  validateForm() {
+    const { name, reason, email, phone, message } = this.state;
+    const errors = {};
+
+    if (!name) errors.name = 'Nome é obrigatório';
+    if (!reason) errors.reason = 'Motivo de Contacto é obrigatório';
+    if (!email) {
+      errors.email = 'E-mail é obrigatório';
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      errors.email = 'E-mail inválido';
+    }
+    if (!phone) {
+      errors.phone = 'Telefone é obrigatório';
+    } else if (!/^\d{10,15}$/.test(phone)) {
+      errors.phone = 'Telefone inválido (apenas números com 10 a 15 dígitos são aceitos)';
+    }
+    if (!message) errors.message = 'Mensagem é obrigatória';
+
+    this.setState({ errors });
+    return errors;
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const errors = this.validateForm();
+
+    const submitButton = document.querySelector('button[type="submit"]');
+
+    if (Object.keys(errors).length > 0) {
+      // Exibir os erros no alerta
+      alert(
+        'Erros encontrados no formulário:\n' +
+        Object.values(errors).join('\n')
+      );
+    } else {
+      submitButton.innerHTML = '<span class="loading"></span> Enviando...';
+      submitButton.disabled = true;
+
+      setTimeout(() => {
+        const { name, reason, email, phone, message } = this.state;
+        const formData = { name, reason, email, phone, message };
+        localStorage.setItem('contactForm', JSON.stringify(formData));
+        submitButton.innerHTML = "Enviado com sucesso!";
+        submitButton.style.backgroundColor = "#4CAF50";
+
+        setTimeout(() => {
+          submitButton.innerHTML = "Enviar Mensagem";
+          submitButton.disabled = false;
+          submitButton.style.backgroundColor = "";
+          this.setState({
+            name: '',
+            reason: '',
+            email: '',
+            phone: '',
+            message: '',
+            errors: {}
+          });
+        }, 3000);
+      }, 2000);
+    }
+  }
+
+  render() {
+    const { errors } = this.state;
+    return React.createElement(
+      "form",
+      { className: "form", onSubmit: this.handleSubmit },
+      React.createElement(
+        "div",
+        null,
+        React.createElement("input", { type: "text", name: "name", placeholder: "Nome", value: this.state.name, onChange: this.handleChange }),
+        errors.name && React.createElement("span", { className: "error" }, errors.name)
+      ),
+      React.createElement(
+        "div",
+        null,
+        React.createElement("input", { type: "text", name: "reason", placeholder: "Motivo de Contacto", value: this.state.reason, onChange: this.handleChange }),
+        errors.reason && React.createElement("span", { className: "error" }, errors.reason)
+      ),
+      React.createElement(
+        "div",
+        null,
+        React.createElement("input", { type: "email", name: "email", placeholder: "Seu e-mail", value: this.state.email, onChange: this.handleChange }),
+        errors.email && React.createElement("span", { className: "error" }, errors.email)
+      ),
+      React.createElement(
+        "div",
+        null,
+        React.createElement("input", { type: "tel", name: "phone", placeholder: "Telefone", value: this.state.phone, onChange: this.handleChange }),
+        errors.phone && React.createElement("span", { className: "error" }, errors.phone)
+      ),
+      React.createElement(
+        "div",
+        null,
+        React.createElement("textarea", {
+          name: "message",
+          placeholder: "Mensagem",
+          required: true,
+          style: { resize: "none", width: "100%", height: "90px" },
+          value: this.state.message,
+          onChange: this.handleChange,
+        }),
+        errors.message && React.createElement("span", { className: "error" }, errors.message)
+      ),
+      React.createElement("button", { type: "submit" }, "Enviar")
+    );
+  }
 }
 
 ReactDOM.render(
