@@ -55,6 +55,10 @@ nav ul li a {
   font-size: 1.6rem;
 }
 
+.logo{
+  font-family: cursive, sans-serif;
+}
+
 /*! dropdown  */
 .dropbtn {
   display: inline-block;
