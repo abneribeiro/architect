@@ -261,34 +261,34 @@ function openModal(url, title, description) {
 
 const projetos = [
   [
+    "/images/photo3.jpg",
+    "Campo Tradicional",
+    "Uma encantadora casa colonial com um design acolhedor e detalhes clássicos. Cercada por um jardim repleto de árvores maduras, a estrutura é destacada pelo telhado inclinado e molduras vermelhas que conferem personalidade ao espaço.",
+  ],
+  [
+    "/images/photo2.jpg",
+    "Transparência Moderna",
+    "Esta casa moderna é marcada por suas amplas fachadas de vidro, permitindo a integração harmoniosa entre os ambientes internos e a paisagem externa. Iluminação arquitetônica valoriza o design minimalista e clean.",
+  ],
+  [
+    "/images/photo4.jpg",
+    "Elegância Industrial",
+    "Um projeto moderno para ambientes corporativos, com divisórias de vidro e acabamentos industriais. Este espaço prioriza iluminação natural e funcionalidade, ideal para empresas inovadoras.",
+  ],
+  [
+    "/images/photo7.jpg",
+    "Refúgio Sustentável",
+    "Construída com materiais ecológicos, esta casa contemporânea combina elegância e sustentabilidade. O design inteligente privilegia espaços abertos e uma integração perfeita com a natureza ao redor.",
+  ],
+  [
+    "/images/photo6.jpg",
+    "Retiro ao Ar Livre",
+    " Uma casa ideal para momentos de lazer e socialização, com espaços abertos que se conectam a um amplo terraço de madeira. Ambientes iluminados e bem ventilados destacam o estilo praiano moderno.",
+  ],
+  [
     "/images/photo1.jpg",
-    "Casa Vista Serena",
-    "Uma residência moderna com amplas janelas que destacam a integração com a natureza ao redor, proporcionando uma vista relaxante e sofisticada.",
-  ],
-  [
-    "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?q=80&w=2065&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "Villa Lumina",
-    "Este projeto combina luz natural e design minimalista para criar um espaço elegante e funcional, perfeito para a vida contemporânea.",
-  ],
-  [
-    "./images/background3.jpg",
-    "Refúgio das Colinas",
-    " Uma casa aconchegante com uma fachada rústica e charmosa, ideal para quem busca conforto e conexão com a natureza",
-  ],
-  [
-    "https://plus.unsplash.com/premium_photo-1677344343928-577750752799?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fGhvbWVzJTIwYXJxdWl0ZXR1cmF8ZW58MHx8MHx8fDA%3D",
-    "Mansão Arquetipo",
-    "Com uma estrutura arrojada e detalhes arquitetônicos impressionantes, esta residência é um marco de inovação e criatividade.",
-  ],
-  [
-    "https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "Residência Harmonia",
-    "Um espaço que equilibra elementos clássicos e modernos, ideal para famílias que prezam por elegância e conforto.",
-  ],
-  [
-    "https://images.unsplash.com/photo-1685098176312-f61787bd0adf?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "Casa Aurora",
-    "Uma casa iluminada por design, que une funcionalidade e estética em um espaço perfeito para dias tranquilos e noites aconchegantes.",
+    "Sofisticação Clássica",
+    "Uma residência de estilo clássico com detalhes modernos, como janelas amplas e um acabamento impecável. O design acolhedor é complementado por um belo jardim frontal.",
   ],
 ];
 
@@ -312,7 +312,7 @@ function ProjetoItem(props) {
           "h2",
           { className: "projeto-item-title" },
           props.lead
-        ) // Não usa mais props.key
+        ) 
       ),
     ]
   );
