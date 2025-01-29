@@ -1,5 +1,7 @@
 # Architect - Professional Architecture Portfolio
 
+[Preview](https://github.com/user-attachments/assets/7e6981f7-fc64-4923-9dbd-90292108381a)
+
 ## Overview
 Architect is a modern and responsive website designed to showcase architectural projects and services. Built with HTML, CSS, and JavaScript, this site provides an elegant and user-friendly interface for potential clients to explore the portfolio, learn about the company's vision, and get in touch for inquiries. 
 
