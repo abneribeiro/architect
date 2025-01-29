@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
       navLinks.classList.remove("active");
     });
   });
-  
+
   // Fecha o menu ao clicar fora dele
   document.addEventListener("click", (e) => {
     if (!navLinks.contains(e.target) && !hamburgerMenu.contains(e.target)) {
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     currentIndex = (currentIndex + 1) % carouselItems.length;
     carouselItems[currentIndex].classList.add("active");
     carouselItems[currentIndex].style.animation = "none";
-    carouselItems[currentIndex].offsetHeight; // Trigger reflow
+    carouselItems[currentIndex].offsetHeight;
     carouselItems[currentIndex].style.animation = null;
 
     setTimeout(() => {
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 400);
   }
 
-  setInterval(showNextImage, 2000); // Change image every 2 seconds
+  setInterval(showNextImage, 2000);
 
   document.querySelectorAll("nav a").forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   function closeModal() {
     modal.style.display = "none";
-    document.body.style.overflow = 'auto';
+    document.body.style.overflow = "auto";
   }
 
   closeBtn.onclick = closeModal;
@@ -254,39 +254,39 @@ function openModal(url, title, description) {
   modalTitle.textContent = title;
   modalDescription.textContent = description;
   modal.style.display = "block";
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow = "hidden";
 }
 
 ("use strict");
 
 const projetos = [
   [
-    "/images/photo3.jpg",
+    "images/photo3.webp",
     "Campo Tradicional",
     "Uma encantadora casa colonial com um design acolhedor e detalhes clássicos. Cercada por um jardim repleto de árvores maduras, a estrutura é destacada pelo telhado inclinado e molduras vermelhas que conferem personalidade ao espaço.",
   ],
   [
-    "/images/photo2.jpg",
+    "images/photo2.webp",
     "Transparência Moderna",
     "Esta casa moderna é marcada por suas amplas fachadas de vidro, permitindo a integração harmoniosa entre os ambientes internos e a paisagem externa. Iluminação arquitetônica valoriza o design minimalista e clean.",
   ],
   [
-    "/images/photo4.jpg",
+    "images/photo4.webp",
     "Elegância Industrial",
     "Um projeto moderno para ambientes corporativos, com divisórias de vidro e acabamentos industriais. Este espaço prioriza iluminação natural e funcionalidade, ideal para empresas inovadoras.",
   ],
   [
-    "/images/photo7.jpg",
+    "images/photo7.webp",
     "Refúgio Sustentável",
     "Construída com materiais ecológicos, esta casa contemporânea combina elegância e sustentabilidade. O design inteligente privilegia espaços abertos e uma integração perfeita com a natureza ao redor.",
   ],
   [
-    "/images/photo6.jpg",
+    "images/photo6.webp",
     "Retiro ao Ar Livre",
     " Uma casa ideal para momentos de lazer e socialização, com espaços abertos que se conectam a um amplo terraço de madeira. Ambientes iluminados e bem ventilados destacam o estilo praiano moderno.",
   ],
   [
-    "/images/photo1.jpg",
+    "images/photo1.webp",
     "Sofisticação Clássica",
     "Uma residência de estilo clássico com detalhes modernos, como janelas amplas e um acabamento impecável. O design acolhedor é complementado por um belo jardim frontal.",
   ],
@@ -312,7 +312,7 @@ function ProjetoItem(props) {
           "h2",
           { className: "projeto-item-title" },
           props.lead
-        ) 
+        )
       ),
     ]
   );
@@ -321,7 +321,7 @@ function ProjetoItem(props) {
 function App({ projeto }) {
   return projeto.map((proj, index) =>
     React.createElement(ProjetoItem, {
-      key: `projeto-${index}`, // Key para React
+      key: `projeto-${index}`,
       id: `projeto-${index}`,
       url: proj[0],
       lead: proj[1],
@@ -369,10 +369,11 @@ class Forms extends React.Component {
     }
     if (!phone) {
       errors.phone = "Telefone é obrigatório";
-    } else if (!/^\d{10,15}$/.test(phone)) {
+    } else if (!/^\+351\d{9}$/.test(phone) && !/^\d{9}$/.test(phone)) {
       errors.phone =
-        "Telefone inválido (apenas números com 10 a 15 dígitos são aceitos)";
+        "Número de telefone inválido. O número deve ter 9 dígitos (com ou sem +351).";
     }
+      
     if (!message) errors.message = "Mensagem é obrigatória";
 
     this.setState({ errors });
