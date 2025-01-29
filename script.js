@@ -360,21 +360,21 @@ class Forms extends React.Component {
     const { name, reason, email, phone, message } = this.state;
     const errors = {};
 
-    if (!name) errors.name = "Nome é obrigatório";
-    if (!reason) errors.reason = "Motivo de Contacto é obrigatório";
+    if (!name) errors.name = "Name is required";
+    if (!reason) errors.reason = "Reason for contact is required";
     if (!email) {
-      errors.email = "E-mail é obrigatório";
+      errors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(email)) {
-      errors.email = "E-mail inválido";
+      errors.email = "Invalid email address";
     }
     if (!phone) {
       errors.phone = "Telefone é obrigatório";
     } else if (!/^\+351\d{9}$/.test(phone) && !/^\d{9}$/.test(phone)) {
       errors.phone =
-        "Número de telefone inválido. O número deve ter 9 dígitos (com ou sem +351).";
+        "Invalid phone number. The number must have 9 digits (with or without +351).";
     }
       
-    if (!message) errors.message = "Mensagem é obrigatória";
+    if (!message) errors.message = "Message is required";
 
     this.setState({ errors });
     return errors;
@@ -389,21 +389,21 @@ class Forms extends React.Component {
     if (Object.keys(errors).length > 0) {
       // Exibir os erros no alerta
       alert(
-        "Erros encontrados no formulário:\n" + Object.values(errors).join("\n")
+        "Errors found in the form:\n" + Object.values(errors).join("\n")
       );
     } else {
-      submitButton.innerHTML = '<span class="loading"></span> Enviando...';
+      submitButton.innerHTML = '<span class="loading"></span> Sending...';
       submitButton.disabled = true;
 
       setTimeout(() => {
         const { name, reason, email, phone, message } = this.state;
         const formData = { name, reason, email, phone, message };
         localStorage.setItem("contactForm", JSON.stringify(formData));
-        submitButton.innerHTML = "Enviado com sucesso!";
+        submitButton.innerHTML = "Successfully sent!";
         submitButton.style.backgroundColor = "#4CAF50";
 
         setTimeout(() => {
-          submitButton.innerHTML = "Enviar Mensagem";
+          submitButton.innerHTML = "Send Message";
           submitButton.disabled = false;
           submitButton.style.backgroundColor = "";
           this.setState({
