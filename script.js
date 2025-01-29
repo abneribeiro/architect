@@ -430,7 +430,7 @@ class Forms extends React.Component {
         React.createElement("input", {
           type: "text",
           name: "name",
-          placeholder: "Nome",
+          placeholder: "Name",
           value: this.state.name,
           onChange: this.handleChange,
         }),
@@ -443,7 +443,7 @@ class Forms extends React.Component {
         React.createElement("input", {
           type: "text",
           name: "reason",
-          placeholder: "Motivo de Contacto",
+          placeholder: "Reason for Contact",
           value: this.state.reason,
           onChange: this.handleChange,
         }),
@@ -456,7 +456,7 @@ class Forms extends React.Component {
         React.createElement("input", {
           type: "email",
           name: "email",
-          placeholder: "Seu e-mail",
+          placeholder: "Email",
           value: this.state.email,
           onChange: this.handleChange,
         }),
@@ -469,7 +469,7 @@ class Forms extends React.Component {
         React.createElement("input", {
           type: "tel",
           name: "phone",
-          placeholder: "Telefone",
+          placeholder: "Phone",
           value: this.state.phone,
           onChange: this.handleChange,
         }),
@@ -481,7 +481,7 @@ class Forms extends React.Component {
         null,
         React.createElement("textarea", {
           name: "message",
-          placeholder: "Mensagem",
+          placeholder: "Message",
           required: true,
           style: { resize: "none", width: "100%", height: "90px" },
           value: this.state.message,
@@ -490,7 +490,7 @@ class Forms extends React.Component {
         errors.message &&
           React.createElement("span", { className: "error" }, errors.message)
       ),
-      React.createElement("button", { type: "submit" }, "Enviar")
+      React.createElement("button", { type: "submit" }, "Send")
     );
   }
 }
