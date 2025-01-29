@@ -262,33 +262,33 @@ function openModal(url, title, description) {
 const projetos = [
   [
     "images/photo3.webp",
-    "Campo Tradicional",
-    "Uma encantadora casa colonial com um design acolhedor e detalhes clássicos. Cercada por um jardim repleto de árvores maduras, a estrutura é destacada pelo telhado inclinado e molduras vermelhas que conferem personalidade ao espaço.",
+    "Traditional Field",
+    "A charming colonial house with a cozy design and classic details. Surrounded by a garden full of mature trees, the structure is highlighted by the sloping roof and red frames that give personality to the space.",
   ],
   [
     "images/photo2.webp",
-    "Transparência Moderna",
-    "Esta casa moderna é marcada por suas amplas fachadas de vidro, permitindo a integração harmoniosa entre os ambientes internos e a paisagem externa. Iluminação arquitetônica valoriza o design minimalista e clean.",
+    "Modern Transparency",
+    "This modern house is marked by its large glass facades, allowing a harmonious integration between the internal environments and the external landscape. Architectural lighting enhances the minimalist and clean design.",
   ],
   [
     "images/photo4.webp",
-    "Elegância Industrial",
-    "Um projeto moderno para ambientes corporativos, com divisórias de vidro e acabamentos industriais. Este espaço prioriza iluminação natural e funcionalidade, ideal para empresas inovadoras.",
+    "Industrial Elegance",
+    "A modern project for corporate environments, with glass partitions and industrial finishes. This space prioritizes natural lighting and functionality, ideal for innovative companies.",
   ],
   [
     "images/photo7.webp",
-    "Refúgio Sustentável",
-    "Construída com materiais ecológicos, esta casa contemporânea combina elegância e sustentabilidade. O design inteligente privilegia espaços abertos e uma integração perfeita com a natureza ao redor.",
+    "Sustainable Refuge",
+    "Built with ecological materials, this contemporary house combines elegance and sustainability. The intelligent design favors open spaces and a perfect integration with the surrounding nature.",
   ],
   [
     "images/photo6.webp",
-    "Retiro ao Ar Livre",
-    " Uma casa ideal para momentos de lazer e socialização, com espaços abertos que se conectam a um amplo terraço de madeira. Ambientes iluminados e bem ventilados destacam o estilo praiano moderno.",
+    "Outdoor Retreat",
+    "An ideal house for moments of leisure and socialization, with open spaces that connect to a large wooden terrace. Bright and well-ventilated environments highlight the modern beach style.",
   ],
   [
     "images/photo1.webp",
-    "Sofisticação Clássica",
-    "Uma residência de estilo clássico com detalhes modernos, como janelas amplas e um acabamento impecável. O design acolhedor é complementado por um belo jardim frontal.",
+    "Classic Sophistication",
+    "A classic-style residence with modern details, such as large windows and impeccable finishes. The cozy design is complemented by a beautiful front garden.",
   ],
 ];
 
